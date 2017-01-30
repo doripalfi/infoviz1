@@ -1,0 +1,107 @@
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>The d3 test</title>
+<style>
+.chart {
+
+}
+
+.main text {
+    font: 10px sans-serif;	
+}
+
+.axis line, .axis path {
+    shape-rendering: crispEdges;
+    stroke: black;
+    fill: none;
+}
+
+circle {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+}
+
+circle:hover {
+        fill: orange !important;
+}
+
+</style>
+        <script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
+      </head>
+      <body>
+        <div class='content'>
+          <!-- /the chart goes here -->
+        </div>
+        <script>
+       // var data = [[5,3, "#40B8AF"], [10,17, 'B2577A'], [15,4, '40B873'], [2,8, 'green'], [2,4, 'blue'], [5,9, 'green'], [3,3, 'pink'], [2,16, 'blue']];
+
+        var data = [[4.78, 7.0, '40B8AF', 'Aldor', 'I have great interest in visual design and filmmaking'], [4.56, 6.0, '40B8AF', 'Aragorn', "I have been an aviation enthusiast since I was a kid, although I do not hold a pilot's license (yet). I enjoy cooking and I try to follow a healthy lifestyle with regular physical activity, such as cycling, running or team sports, mostly football. I have developed an increasing interest in all sorts of water-sports over the past few years, mostly in free-diving and surfing. I have an appreciation for all art forms but I am far from being an art-savvy."], [4.11, 6.33, 'B2577A', 'Arwen', ''], [4.11, 5.0, '40B8AF', 'Balin', 'Some hobbies would be graphic design and 3D modeling.'], [4.89, 5.33, '40B8AF', 'Bereg', 'Science, sports, fashion, travel'], [6.22, 8.0, 'B2577A', 'Bifur', "25 year old student doing my 4th/5th year. I'm outgoing as a person and I like to learn new things and challenge myself. Recently took a gap year traveling in Asia and later on studying in Australia. I like graphic illustration, I'm self-taught and it's more of a hobby. Otherwise I've recently started going to events/hackatons in my spare time. Mostly related to helping organisations develop ideas and prototypes by the use of technology. Also looking forward to the Crash Bandicoot on PS4 game release!"], [7.0, 7.33, 'B2577A', 'Bilbo', 'JavaScript interests me. Alongside my education, I like to work on freelance projects to pay my bills and open source projects to give back. I am a huge fan on reading content related to design process and especially typography.'], [4.56, 5.67, 'B2577A', 'Bofur', ''], [4.78, 5.33, '40B873', 'Bombadil', 'travel, sports, running, yoga, cycling, photography, coffee, gender equality, diversity, education, human rights'], [4.67, 6.33, '40B8AF', 'Bombur', 'I like football and play on the school team. I also like painting, illustrating and programming.'], [4.11, 6.67, '40B8AF', 'Borin', 'Reading, music, arts, bikes, travel, technology, programming, humor.']]
+
+   
+    var margin = {top: 20, right: 15, bottom: 60, left: 60}
+      , width = 960 - margin.left - margin.right
+      , height = 500 - margin.top - margin.bottom;
+    
+    var x = d3.scale.linear()
+              .domain([0, d3.max(data, function(d) { return d[0]; })])
+              .range([ 0, width ]);
+    
+    var y = d3.scale.linear()
+            .domain([0, d3.max(data, function(d) { return d[1]; })])
+            .range([ height, 0 ]);
+ 
+    var chart = d3.select('body')
+  .append('svg:svg')
+  .attr('width', width + margin.right + margin.left)
+  .attr('height', height + margin.top + margin.bottom)
+  .attr('class', 'chart')
+
+
+    var main = chart.append('g')
+  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  .attr('width', width)
+  .attr('height', height)
+  .attr('class', 'main')   
+        
+    // draw the x axis
+    var xAxis = d3.svg.axis()
+  .scale(x)
+  .orient('bottom');
+
+    main.append('g')
+  .attr('transform', 'translate(0,' + height + ')')
+  .attr('class', 'main axis date')
+  .call(xAxis);
+
+    // draw the y axis
+    var yAxis = d3.svg.axis()
+  .scale(y)
+  .orient('left');
+
+    main.append('g')
+  .attr('transform', 'translate(0,0)')
+  .attr('class', 'main axis date')
+  .call(yAxis);
+
+    var g = main.append("svg:g"); 
+    
+    g.selectAll("scatter-dots")
+      .data(data)
+      .enter().append("svg:circle")
+          .attr("cx", function (d,i) { return x(d[0]); } )
+          .attr("cy", function (d) { return y(d[1]); } )
+          .attr("r", 15)
+          .style("fill", function(d) { return d[2]; })
+          .append("title")
+          .text(function(d) {
+         return  d[3] + ", Interest: " + d[4];
+        });
+          
+        </script>
+      </body>
+    </html>
+
+
