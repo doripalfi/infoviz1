@@ -1,0 +1,38 @@
+h3 {
+	color: #ffffff;
+	margin-left: 20px;
+	font-family: Futura;
+}
+
+body { font: 12px Arial;}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.jumbotron {
+  text-align: center;
+  border-bottom: .05rem solid #e5e5e5;
+	padding: 0.5em;
+}
+
+
+.header {
+  padding-bottom: 1rem;
+  border-bottom: .05rem solid #e5e5e5;
+}
+
+            p{
+                font-family: Avenir !important;
+                font-size: 1.7rem !important;
+            }
